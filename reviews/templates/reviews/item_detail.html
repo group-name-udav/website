@@ -1,0 +1,16 @@
+{% extends 'reviews/base.html' %}
+{% block content %}
+<h1>{{ item.title }}</h1>
+<p><strong>Category:</strong> {{ item.category.name }}</p>
+<p>{{ item.description }}</p>
+
+<h3>Reviews:</h3>
+<ul>
+    {% for review in reviews %}
+    <li><strong>{{ review.author }}:</strong> {{ review.text }} (Rating: {{ review.rating }}/10)</li>
+    {% empty %}
+    <li>No reviews yet.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'item_list' %}">Back to Catalog</a>
+{% endblock %}
