@@ -27,3 +27,5 @@ class Review(models.Model):
 
     def __str__(self):
         return f'Review by {self.author} on {self.item}'
+    class Meta:
+        unique_together = ('item', 'author')
