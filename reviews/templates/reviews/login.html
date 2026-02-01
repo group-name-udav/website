@@ -1,0 +1,28 @@
+{% extends "reviews/base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <h1>Login</h1>
+    
+    {# Проверяем, авторизован ли пользователь (Conditionals) #}
+    {% if user.is_authenticated %}
+        <div class="alert alert-warning">
+            <p>You are already logged in as <strong>{{ user.username }}</strong>.</p>
+            <a href="{% url 'item_list' %}" class="btn">Go to Movies</a>
+        </div>
+    {% else %}
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            
+            {# Стандартный вывод формы входа #}
+            {{ form.as_p }}
+
+            <button type="submit" class="btn btn-success">Login</button>
+        </form>
+
+        <p>Don't have an account? <a href="{% url 'register' %}">Register here</a>.</p>
+    {% endif %}
+</div>
+{% endblock %}

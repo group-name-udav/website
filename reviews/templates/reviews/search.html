@@ -1,0 +1,26 @@
+{% extends 'reviews/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Results for: "{{ query }}"</h2>
+    <hr>
+
+    {% if results %}
+    <ul>
+        {% for item in results %}
+        <li style="margin-bottom: 15px;">
+            <a href="{% url 'item_detail' item.id %}" style="font-size: 1.2rem; font-weight: bold;">
+                {{ item.title }}
+            </a>
+            ({{ item.category.name }})
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No items found. Try another search term.</p>
+    {% endif %}
+
+    <br>
+    <a href="{% url 'item_list' %}">Back to Catalog</a>
+</div>
+{% endblock %}
