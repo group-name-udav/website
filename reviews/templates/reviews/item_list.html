@@ -5,12 +5,21 @@
 <div class="catalog">
     {% for item in items %}
     <div class="item-card">
-        <span class="category-badge">{{ item.category.name }}</span>
-        <h2><a href="{% url 'item_detail' item.pk %}">{{ item.title }}</a></h2>
-        <p><strong>By:</strong> {{ item.author_or_director }}</p>
-        <p>{{ item.description }}</p>
-
-        <a href="{% url 'item_detail' item.pk %}" class="view-link">View Reviews & Details</a>
+        <div class="item-card-image">
+            {% if item.image %}
+                <img src="{{ item.image.url }}" alt="{{ item.title }}">
+            {% else %}
+                <div class="item-card-image-placeholder">
+                </div>
+            {% endif %}
+        </div>
+        <div class="item-card-content">
+            <span class="category-badge">{{ item.category.name }}</span>
+            <h2><a href="{% url 'item_detail' item.pk %}">{{ item.title }}</a></h2>
+            <p><strong>By:</strong> {{ item.author_or_director }}</p>
+            <p>{{ item.description|truncatewords:20 }}</p>
+            <a href="{% url 'item_detail' item.pk %}" class="view-link">View Details</a>
+        </div>
     </div>
     {% empty %}
     <p>No items found in the database.</p>

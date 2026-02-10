@@ -5,24 +5,19 @@
 {% block content %}
 <div class="registration-container">
     <h1>Sign Up</h1>
-    <p>Please fill in this form to create an account.</p>
+    <p>Create an account to start leaving reviews and recommendations.</p>
     <hr>
 
-    {# Проверяем, не вошел ли пользователь уже в систему #}
     {% if user.is_authenticated %}
         <div class="alert alert-info">
-            <p>You are already logged in as <strong>{{ user.username }}</strong>. 
-            No need to register again!</p>
-            <a href="{% url 'item_list' %}" class="btn">Go to Home</a>
+            <p>You are already logged in as <strong>{{ user.username }}</strong>. No need to register again!</p>
+            <a href="{% url 'item_list' %}" class="btn btn-primary">Go to Catalog</a>
         </div>
     {% else %}
         <form method="POST" action="{% url 'register' %}">
             {% csrf_token %}
-            
-            {# Рендерим форму, которую передадим из views.py #}
             {{ form.as_p }}
-
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-success" style="width: 100%;">Register</button>
         </form>
 
         <p>Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>

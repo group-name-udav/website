@@ -3,38 +3,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Movie & Book Reviews{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<body style="margin: 0; font-family: Arial, sans-serif;">
-    <nav style="background-color: #222; color: white; padding: 10px 0;">
-        <div style="display: flex; align-items: center; justify-content: center; gap: 40px; max-width: 1200px; margin: 0 auto;">
-
+<body>
+    <nav>
+        <div class="nav-wrapper">
             <div class="logo">
-                <a href="/" style="font-weight: bold; text-decoration: none; color: #00d1b2; font-size: 1.5rem;">Catalog</a>
+                <a href="/">Catalog</a>
             </div>
 
-            <form action="{% url 'search' %}" method="get" style="display: flex; background: white; border-radius: 4px; padding: 2px; width: 350px;">
-                <input type="text" name="q" placeholder="Search movies or books..." style="padding: 8px; border: none; outline: none; flex-grow: 1; color: black; border-radius: 4px 0 0 4px;">
-                <button type="submit" style="padding: 8px 15px; border: none; background: #00d1b2; color: white; cursor: pointer; border-radius: 0 4px 4px 0; font-weight: bold;">Find</button>
+            <form action="{% url 'search' %}" method="get" class="search-form">
+                <input type="text" name="q" placeholder="Search movies or books...">
+                <button type="submit">Search</button>
             </form>
 
-            <div class="auth-buttons" style="display: flex; align-items: center; gap: 15px; white-space: nowrap;">
+            <div class="auth-buttons">
                 {% if user.is_authenticated %}
-                <span>Hello, <strong style="color: #00d1b2;">{{ user.username }}</strong>!</span>
+                <span>Hello, <strong>{{ user.username }}</strong>!</span>
                 <form action="{% url 'logout' %}" method="post" style="display: inline; margin: 0;">
                     {% csrf_token %}
-                    <button type="submit" style="background: #ff4757; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold;">Logout</button>
+                    <button type="submit">Logout</button>
                 </form>
                 {% else %}
-                <a href="{% url 'login' %}" style="color: white; text-decoration: none; font-weight: bold;">Login</a>
-                <a href="{% url 'register' %}" style="padding: 8px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px; font-weight: bold;">Sign Up</a>
+                <a href="{% url 'login' %}" style="color: black;">Login</a>
+                <a href="{% url 'register' %}" style="padding: 10px 16px; background-color: #10b981; color: white; border-radius: 6px; text-decoration: none;">Sign Up</a>
                 {% endif %}
             </div>
         </div>
     </nav>
 
-    <main style="padding: 40px 20px; max-width: 1000px; margin: 0 auto;">
+    <main>
         {% block content %}
         {% endblock %}
     </main>

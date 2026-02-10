@@ -14,6 +14,7 @@ class MediaItem(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE) # ForeignKey 
     created_date = models.DateTimeField(default=timezone.now) # DateTimeField 
     author_or_director = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def __str__(self):
         return self.title
